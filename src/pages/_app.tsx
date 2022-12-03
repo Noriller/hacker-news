@@ -11,10 +11,11 @@ import "../styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   const [queryClient] = React.useState(() => new QueryClient());
+  const { dehydratedState } = pageProps as { dehydratedState: unknown };
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
+      <Hydrate state={dehydratedState}>
         <Component {...pageProps} />
       </Hydrate>
       <ReactQueryDevtools />
