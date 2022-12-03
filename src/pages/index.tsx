@@ -9,6 +9,10 @@ import { MorePostsButton } from "../components/MorePostsButton";
 
 export default function Home() {
   const { data, isError, isLoading, error } = usePosts();
+
+  // the docs don't really show if and how to paginate
+  // so at this point we have an array of up to 500 ids
+  // this coupled with slice, throttles the requests for the actual posts
   const [maxPosts, setMaxPosts] = useState(10);
 
   if (isLoading) {
@@ -25,6 +29,8 @@ export default function Home() {
     return <div>{"oops " + JSON.stringify(error)}</div>;
   }
 
+  // while we have more data than what we are showing
+  // we display the button to display more 10 posts
   const morePosts = data.length >= maxPosts;
 
   return (
