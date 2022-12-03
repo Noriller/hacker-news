@@ -1,10 +1,24 @@
+import clsx from "clsx";
 import parse from "html-react-parser";
 import { sanitize } from "isomorphic-dompurify";
+import { useEffect, useState } from "react";
 import { usePost } from "../service/Post/usePost";
 import { PostSkeleton } from "./PostSkeleton";
 
 export function Post({ id }: { id: number }) {
   const { data, isLoading, isError, error } = usePost(id);
+  const [initialDecoration, setInitialDecoration] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setInitialDecoration(false);
+    }, 1000);
+
+    return () => {
+      setInitialDecoration(true);
+      clearTimeout(timeout);
+    };
+  }, [data, isLoading]);
 
   if (isLoading) {
     return <PostSkeleton />;
@@ -30,7 +44,13 @@ export function Post({ id }: { id: number }) {
             <span className="mr-2 text-xl" aria-label={type}>
               {type === "job" ? "💼" : "📰"}
             </span>
-            <span className="decoration-violet-300 group-hover:underline group-focus:underline">
+            <span
+              className={clsx(
+                "decoration-violet-300 group-hover:underline group-focus:underline",
+                initialDecoration &&
+                  "underline decoration-amber-400 decoration-4"
+              )}
+            >
               {sanitizeAndParseToReact(title)}
             </span>
           </a>
