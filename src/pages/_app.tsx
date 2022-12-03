@@ -22,7 +22,9 @@ const MyApp: AppType = ({ Component, pageProps }) => {
           <meta name="description" content="Top stories from Hacker News" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Component {...pageProps} />
+        <main className="flex min-h-screen flex-col items-center bg-gradient-to-br from-[#27026d] to-[#15172c]">
+          <Component {...pageProps} />
+        </main>
       </Hydrate>
       <ReactQueryDevtools />
     </QueryClientProvider>
