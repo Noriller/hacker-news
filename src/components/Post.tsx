@@ -15,35 +15,41 @@ export function Post({ id }: { id: number }) {
     return <div>{"oops " + JSON.stringify(error)}</div>;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { title, text, url, by, time, type } = data;
 
   return (
-    <div className="container w-[70%] rounded-lg bg-gradient-to-r from-[#8029d6] to-[#ff0080] p-2 text-white">
-      <div className="bg-black p-4">
-        <h2 className="mb-2 flex justify-between rounded-2xl border-2 border-white p-2 text-2xl">
+    <div className="container w-[70%] rounded-lg bg-gradient-to-r from-[#8029d6] to-[#ff0080] p-1 text-white">
+      <div className="bg-black p-2">
+        <h2 className="mb-2 flex justify-between rounded-2xl p-2 text-2xl">
           <a
             href={url}
             rel="noopener noreferrer"
-            className="flex justify-between"
+            className="group flex justify-between"
             tabIndex={1}
           >
             <span className="mr-2 text-xl" aria-label={type}>
               {type === "job" ? "💼" : "📰"}
             </span>
-            <span>{sanitizeAndParseToReact(title)}</span>
+            <span className="decoration-violet-300 group-hover:underline group-focus:underline">
+              {sanitizeAndParseToReact(title)}
+            </span>
           </a>
         </h2>
-        <div className="flex flex-col gap-2 rounded-2xl border border-gray-300 p-2 text-2xl">
+        <div className="flex flex-col gap-2 rounded-2xl p-2 text-2xl">
           <div className="flex justify-between">
             <div className="text-xl md:before:content-['Author:_']">{by}</div>
             <div className="text-xl md:before:content-['Date:_']">
-              {new Date(time).toISOString().slice(0, 10)}
+              {new Date(time * 1000).toISOString().slice(0, 10)}
             </div>
           </div>
-          <div className="text-xl [&:not(:hover,:focus)]:truncate" tabIndex={1}>
-            {text}
-          </div>
+          {text && (
+            <div
+              className="coxinha max-h-[999rem] text-xl transition-[max-height] ease-out [&:not(:hover,:focus)]:max-h-8 [&:not(:hover,:focus)]:truncate"
+              tabIndex={1}
+            >
+              {sanitizeAndParseToReact(text)}
+            </div>
+          )}
         </div>
       </div>
     </div>
