@@ -20,8 +20,12 @@ pnpm local
 ## Stack used
 
 - Next
+  - For the dev experience and ease of deployment
 - Typescript
+  - For the dev experience
 - Tailwind CSS
+  - For being quickly able to build something beautiful
 - React Query
+  - For the "to the point" components we are able to build and also caching abilities
 
 Project kickoff with `create-t3-app`.
