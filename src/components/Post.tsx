@@ -38,6 +38,7 @@ export function Post({ id }: { id: number }) {
           <a
             href={url}
             rel="noopener noreferrer"
+            target="_blank"
             className="group flex justify-between"
             tabIndex={1}
           >
