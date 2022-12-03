@@ -5,6 +5,7 @@ import { Post } from "../components/Post";
 import { getPost } from "../service/Post/getPost";
 import { getPosts } from "../service/Posts/getPosts";
 import { usePosts } from "../service/Posts/usePosts";
+import { MorePostsButton } from "../components/MorePostsButton";
 
 export default function Home() {
   const { data, isError, isLoading, error } = usePosts();
@@ -34,14 +35,11 @@ export default function Home() {
           <Post id={i} key={i} />
         ))}
         {morePosts && (
-          <button
-            onClick={() => setMaxPosts((n) => n + 10)}
-            className="container w-[70%] rounded-lg bg-gradient-to-r from-[#8029d6] to-[#ff0080] p-2 text-white"
-          >
-            <span className="block rounded-lg bg-[#ffffff88] p-3 text-2xl font-bold text-black">
-              Show more Posts ({maxPosts}/{data.length})
-            </span>
-          </button>
+          <MorePostsButton
+            setMaxPosts={setMaxPosts}
+            maxPosts={maxPosts}
+            data={data}
+          />
         )}
       </div>
     </div>
