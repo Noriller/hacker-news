@@ -1,4 +1,4 @@
-import { PostType } from "../../../service/types";
+import type { PostType } from "../../../service/types";
 
 export function getTypeEmoji(type: string) {
   // from the docs, the API should return only the types "job" or "story"
