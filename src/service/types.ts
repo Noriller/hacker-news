@@ -1,6 +1,8 @@
+export type PostType = 'job' | 'story' | 'comment' | 'poll' | 'pollopt';
+
 export type Post = {
   id: number;
-  type: 'job' | 'story' | 'comment' | 'poll' | 'pollopt';
+  type: PostType;
   by: string;
   time: number;
   text: string;
