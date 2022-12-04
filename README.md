@@ -17,6 +17,10 @@ pnpm dev
 pnpm local
 ```
 
+### Or also
+
+[Just visit the version deployed at Vercel](https://noriller-hacker-news.vercel.app/)
+
 ## Stack used
 
 - Next
