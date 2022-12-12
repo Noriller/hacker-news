@@ -1,13 +1,16 @@
+import clsx from "clsx";
+import { useState } from "react";
 import { usePost } from "../../service/Post/usePost";
 import { PostSkeleton } from "../PostSkeleton";
 import { sanitizeAndParseToReact } from "./helpers/sanitizeAndParseToReact";
-import { useDecoration } from "./hooks/useDecoration";
 import { unixToYYYYMMDD } from "./helpers/unixToYYYYMMDD";
+import { useDecoration } from "./hooks/useDecoration";
 import { PostTitleLink } from "./PostTitleLink";
 
 export function Post({ id }: { id: number }) {
   const { data, isLoading, isError, error } = usePost(id);
   const decoration = useDecoration(data, isLoading);
+  const [visited, setVisited] = useState(false);
 
   if (isLoading) {
     return <PostSkeleton />;
@@ -48,7 +51,12 @@ export function Post({ id }: { id: number }) {
           </div>
           {text && (
             <div
-              className="max-h-[999rem] text-xl transition-[max-height] ease-out [&:not(:hover,:focus)]:max-h-8 [&:not(:hover,:focus)]:truncate"
+              onMouseEnter={() => setVisited(true)}
+              onPointerEnter={() => setVisited(true)}
+              className={clsx(
+                "max-h-[999rem] text-xl transition-[max-height] ease-in",
+                !visited && "max-h-8 truncate"
+              )}
               tabIndex={0}
             >
               {sanitizeAndParseToReact(text)}
